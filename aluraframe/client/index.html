@@ -36,7 +36,7 @@
     </form>
 
     <div class="text-center">
-        <button class="btn btn-primary text-center" type="button">
+        <button onclick="negociacaoController.importaNegociacoes()" class="btn btn-primary text-center" type="button">
             Importar Negociações
         </button>
         <button onclick="negociacaoController.apaga()" class="btn btn-primary text-center" type="button">
@@ -45,7 +45,7 @@
         </button>
     </div>
     <br>
-    <br>
+    <br> this._mensagem.texto = 'Não foi possivel obter as negociações da semana';
 
     <div id="negociacoesView"></div>
 
@@ -59,6 +59,8 @@
     <script src="js/app/views/MensagemView.js"></script>
     <script src="js/app/services/ProxyFactory.js"></script>
     <script src="js/app/helpers/Bind.js"></script>
+    <script src="js/app/services/NegociacaoService.js"></script>
+
 
 
 
