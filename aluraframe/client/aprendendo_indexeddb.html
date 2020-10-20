@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendendo IndexedDB</title>
+</head>
+
+<body>
+    <script>
+        let openRequest = window.indexedDB.open('aluraframe', 1);
+
+        openRequest.onupgradeneeded = e => {
+            console.log('Cria ou alterea um banco j[a existente');
+        };
+
+        openRequest.onsuccess = e => {
+            console.log('Conexão obtida com sucesso');
+        };
+
+        openRequest.onerror = e => {
+            console.log(e.target.error);
+        };
+    </script>
+</body>
+
+</html>
