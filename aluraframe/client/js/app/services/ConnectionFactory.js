@@ -1,12 +1,12 @@
-let ConnectionFactory = (function() {
+var ConnectionFactory = (function() {
 
     const stores = ['negociacoes'];
     const version = 4;
     const dbName = 'aluraframe';
 
-    let connection = null;
+    var connection = null;
 
-    let close = null;
+    var close = null;
 
     return class ConnectionFactory {
 
@@ -24,12 +24,12 @@ let ConnectionFactory = (function() {
                 openRequest.onupgradeneeded = e => {
 
                     ConnectionFactory._createStores(e.target.result);
+
                 };
 
                 openRequest.onsuccess = e => {
 
                     if (!connection) {
-
                         connection = e.target.result;
                         close = connection.close.bind(connection);
                         connection.close = function() {
@@ -37,6 +37,7 @@ let ConnectionFactory = (function() {
                         };
                     }
                     resolve(connection);
+
                 };
 
                 openRequest.onerror = e => {
@@ -45,23 +46,30 @@ let ConnectionFactory = (function() {
 
                     reject(e.target.error.name);
                 };
+
             });
         }
+
         static _createStores(connection) {
 
             stores.forEach(store => {
 
                 if (connection.objectStoreNames.contains(store)) connection.deleteObjectStore(store);
                 connection.createObjectStore(store, { autoIncrement: true });
+
             });
+
         }
 
         static closeConnection() {
+
             if (connection) {
                 close();
                 connection = null;
+                close = null;
             }
         }
     }
+
 
 })();
